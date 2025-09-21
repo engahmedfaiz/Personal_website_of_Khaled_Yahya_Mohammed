@@ -144,7 +144,7 @@
     @apply font-arabic;
   }
 
-  /* Modern scrollbar styling */
+  /* Enhanced scrollbar styling with legal-themed colors */
   ::-webkit-scrollbar {
     width: 8px;
   }
@@ -158,14 +158,16 @@
     background: linear-gradient(180deg, var(--primary), oklch(0.65 0.15 85));
     border-radius: 4px;
     transition: all 0.3s ease;
+    border: 1px solid var(--primary) / 20;
   }
 
   ::-webkit-scrollbar-thumb:hover {
     background: linear-gradient(180deg, oklch(0.85 0.2 85), var(--primary));
     transform: scale(1.1);
+    box-shadow: 0 0 10px var(--primary) / 50;
   }
 
-  /* Added smooth animations and modern effects */
+  /* Added legal-themed animations and effects */
   @keyframes float {
     0%,
     100% {
@@ -179,10 +181,34 @@
   @keyframes glow {
     0%,
     100% {
-      box-shadow: 0 0 20px var(--primary);
+      box-shadow: 0 0 20px var(--primary) / 30;
     }
     50% {
-      box-shadow: 0 0 40px var(--primary), 0 0 60px var(--primary);
+      box-shadow: 0 0 40px var(--primary) / 50, 0 0 60px var(--primary) / 30;
+    }
+  }
+
+  @keyframes scaleRotate {
+    0% {
+      transform: scale(1) rotate(0deg);
+    }
+    50% {
+      transform: scale(1.1) rotate(180deg);
+    }
+    100% {
+      transform: scale(1) rotate(360deg);
+    }
+  }
+
+  @keyframes legalPulse {
+    0%,
+    100% {
+      opacity: 0.3;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.8;
+      transform: scale(1.05);
     }
   }
 
@@ -194,11 +220,20 @@
     animation: glow 2s ease-in-out infinite;
   }
 
-  /* Enhanced focus states */
+  .animate-scale-rotate {
+    animation: scaleRotate 20s linear infinite;
+  }
+
+  .animate-legal-pulse {
+    animation: legalPulse 3s ease-in-out infinite;
+  }
+
+  /* Enhanced focus states with legal theme */
   .focus-visible:focus-visible {
     outline: 2px solid var(--primary);
     outline-offset: 2px;
     border-radius: var(--radius);
+    box-shadow: 0 0 0 4px var(--primary) / 20;
   }
 
   /* Smooth transitions for all interactive elements */
@@ -209,10 +244,10 @@
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  /* Modern backdrop blur effects */
+  /* Enhanced backdrop blur effects with legal sophistication */
   .backdrop-blur-modern {
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    backdrop-filter: blur(20px) saturate(180%) brightness(1.1);
+    -webkit-backdrop-filter: blur(20px) saturate(180%) brightness(1.1);
   }
 
   /* Enhanced text rendering for better readability */
@@ -220,5 +255,30 @@
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Added legal document-inspired styling */
+  .legal-document-border {
+    border-image: linear-gradient(45deg, var(--primary), transparent, var(--primary)) 1;
+  }
+
+  .legal-seal {
+    position: relative;
+  }
+
+  .legal-seal::before {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    border: 2px solid var(--primary);
+    border-radius: 50%;
+    opacity: 0.3;
+    animation: legalPulse 3s ease-in-out infinite;
+  }
+
+  /* Professional legal hover effects */
+  .legal-hover:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px var(--primary) / 20;
   }
 }

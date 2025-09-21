@@ -26,6 +26,10 @@ import {
   Sparkles,
   Menu,
   X,
+  BookOpen,
+  Briefcase,
+  Eye,
+  Heart,
 } from "lucide-react"
 
 export default function LawyerWebsite() {
@@ -93,11 +97,32 @@ export default function LawyerWebsite() {
   }
 
   return (
-    <div className="min-h-screen bg-background text-foreground overflow-hidden">
+    <div className="min-h-screen bg-background text-foreground overflow-hidden relative">
+      <div className="fixed inset-0 pointer-events-none">
+        {/* Legal pattern background */}
+        <div className="absolute inset-0 opacity-[0.02]">
+          <div className="absolute top-10 left-10 w-32 h-32 border-2 border-primary/20 rounded-full animate-pulse" />
+          <div className="absolute top-32 right-20 w-24 h-24 border border-primary/10 rotate-45" />
+          <div className="absolute bottom-20 left-20 w-40 h-40 border border-primary/10 rounded-full" />
+          <div className="absolute bottom-40 right-40 w-20 h-20 border-2 border-primary/20 rotate-12" />
+        </div>
+
+        {/* Floating legal icons */}
+        <div className="absolute top-1/4 left-1/4 opacity-5 animate-float">
+          <Scale className="w-16 h-16 text-primary" />
+        </div>
+        <div className="absolute top-3/4 right-1/4 opacity-5 animate-float" style={{ animationDelay: "1s" }}>
+          <Gavel className="w-12 h-12 text-primary" />
+        </div>
+        <div className="absolute top-1/2 left-1/6 opacity-5 animate-float" style={{ animationDelay: "2s" }}>
+          <BookOpen className="w-14 h-14 text-primary" />
+        </div>
+      </div>
+
       <div className="fixed top-4 left-4 z-50 animate-in slide-in-from-left-5 duration-1000 delay-500">
         <Button
           size="sm"
-          className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-2xl hover:shadow-primary/25 transition-all duration-300 hover:scale-105 group text-xs sm:text-sm px-3 py-2 sm:px-4 sm:py-3"
+          className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-2xl hover:shadow-primary/25 transition-all duration-300 hover:scale-105 group text-xs sm:text-sm px-3 py-2 sm:px-4 sm:py-3 animate-glow"
           onClick={() => setActiveSection("contact")}
         >
           <Sparkles className="w-3 h-3 sm:w-4 sm:h-4 ml-1 sm:ml-2 group-hover:rotate-12 transition-transform" />
@@ -126,17 +151,31 @@ export default function LawyerWebsite() {
           {/* Profile Section */}
           <div className="text-center space-y-3 sm:space-y-4 animate-in fade-in slide-in-from-right-4 duration-1000 delay-300">
             <div className="relative w-20 h-20 sm:w-24 sm:h-24 mx-auto">
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/30 to-primary/10 rounded-full animate-pulse" />
-              <div className="relative w-20 h-20 sm:w-24 sm:h-24 bg-primary/20 rounded-full flex items-center justify-center backdrop-blur-sm">
-                <Scale className="w-10 h-10 sm:w-12 sm:h-12 text-primary animate-in zoom-in duration-1000 delay-700" />
+              <div className="absolute -inset-4 bg-gradient-to-br from-primary/20 via-primary/10 to-transparent rounded-full animate-pulse" />
+              <div
+                className="absolute -inset-2 border border-primary/30 rounded-full animate-spin"
+                style={{ animationDuration: "20s" }}
+              />
+              <div className="relative w-20 h-20 sm:w-24 sm:h-24 bg-gradient-to-br from-primary/30 to-primary/10 rounded-full flex items-center justify-center backdrop-blur-sm border border-primary/20">
+                <Scale className="w-10 h-10 sm:w-12 sm:h-12 text-primary animate-in zoom-in duration-1000 delay-700 drop-shadow-lg" />
               </div>
             </div>
             <div className="space-y-2">
-              <h1 className="text-xl sm:text-2xl font-bold text-balance bg-gradient-to-l from-primary to-foreground bg-clip-text text-transparent">
+              <h1 className="text-xl sm:text-2xl font-bold text-balance bg-gradient-to-l from-primary via-foreground to-primary bg-clip-text text-transparent">
                 خالد يحيى محمد الناصر
               </h1>
               <p className="text-sm sm:text-base text-muted-foreground font-medium">محامي ومستشار قانوني</p>
-              <p className="text-xs sm:text-sm text-primary">مترافع أمام المحكمة العليا</p>
+              <p className="text-xs sm:text-sm text-primary font-semibold">مترافع أمام المحكمة العليا</p>
+              <div className="flex flex-wrap gap-1 justify-center mt-2">
+                <Badge variant="secondary" className="text-xs bg-primary/10 text-primary border-primary/20">
+                  <Briefcase className="w-3 h-3 ml-1" />
+                  محكم دولي
+                </Badge>
+                <Badge variant="secondary" className="text-xs bg-primary/10 text-primary border-primary/20">
+                  <Shield className="w-3 h-3 ml-1" />
+                  15+ سنة خبرة
+                </Badge>
+              </div>
             </div>
           </div>
 
@@ -155,15 +194,21 @@ export default function LawyerWebsite() {
                   setActiveSection(item.id)
                   setIsMobileMenuOpen(false)
                 }}
-                className={`w-full flex items-center gap-3 px-3 sm:px-4 py-2 sm:py-3 rounded-xl text-right transition-all duration-300 group animate-in slide-in-from-right-4 text-sm sm:text-base ${
+                className={`w-full flex items-center gap-3 px-3 sm:px-4 py-2 sm:py-3 rounded-xl text-right transition-all duration-300 group animate-in slide-in-from-right-4 text-sm sm:text-base relative overflow-hidden ${
                   activeSection === item.id
                     ? "bg-primary text-primary-foreground shadow-lg scale-105"
                     : "hover:bg-secondary/50 text-muted-foreground hover:text-foreground hover:scale-102"
                 }`}
                 style={{ animationDelay: `${400 + index * 100}ms` }}
               >
-                <div className="group-hover:scale-110 transition-transform duration-300">{item.icon}</div>
-                {item.label}
+                {activeSection === item.id && (
+                  <div className="absolute inset-0 opacity-10">
+                    <div className="absolute top-1 right-1 w-2 h-2 border border-primary-foreground/30 rotate-45" />
+                    <div className="absolute bottom-1 left-1 w-2 h-2 border border-primary-foreground/30 rounded-full" />
+                  </div>
+                )}
+                <div className="group-hover:scale-110 transition-transform duration-300 relative z-10">{item.icon}</div>
+                <span className="relative z-10">{item.label}</span>
               </button>
             ))}
           </nav>
@@ -197,8 +242,33 @@ export default function LawyerWebsite() {
               {/* Hero Section */}
               <div className="relative min-h-[70vh] sm:min-h-[80vh] flex items-center justify-center">
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary/10 rounded-2xl sm:rounded-3xl" />
+
+                {/* Legal decorative elements */}
+                <div className="absolute top-10 left-10 opacity-10">
+                  <div className="w-20 h-20 border-2 border-primary rounded-full flex items-center justify-center">
+                    <Scale className="w-8 h-8 text-primary" />
+                  </div>
+                </div>
+                <div className="absolute bottom-10 right-10 opacity-10">
+                  <div className="w-16 h-16 border border-primary rotate-45 flex items-center justify-center">
+                    <Gavel className="w-6 h-6 text-primary -rotate-45" />
+                  </div>
+                </div>
+
                 <div className="relative text-center space-y-6 sm:space-y-8 max-w-4xl px-4">
                   <div className="space-y-4 sm:space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-300">
+                    <div className="flex items-center justify-center gap-4 mb-6">
+                      <div className="w-12 h-12 border-2 border-primary rounded-full flex items-center justify-center animate-pulse">
+                        <Scale className="w-6 h-6 text-primary" />
+                      </div>
+                      <div className="h-px w-20 bg-gradient-to-r from-transparent via-primary to-transparent" />
+                      <div className="w-8 h-8 border border-primary rotate-45" />
+                      <div className="h-px w-20 bg-gradient-to-r from-transparent via-primary to-transparent" />
+                      <div className="w-12 h-12 border-2 border-primary rounded-full flex items-center justify-center animate-pulse">
+                        <Gavel className="w-6 h-6 text-primary" />
+                      </div>
+                    </div>
+
                     <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-balance">
                       <span className="bg-gradient-to-l from-primary via-foreground to-primary bg-clip-text text-transparent">
                         العدالة
@@ -209,14 +279,18 @@ export default function LawyerWebsite() {
                     <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground text-pretty leading-relaxed max-w-3xl mx-auto">
                       محامي ومستشار قانوني متخصص في الشريعة والقانون، مترافع أمام المحكمة العليا
                       <br />
-                      <span className="text-primary font-semibold">خبرة تزيد عن 15 عاماً في خدمة العدالة</span>
+                      <span className="text-primary font-semibold flex items-center justify-center gap-2 mt-2">
+                        <Eye className="w-5 h-5" />
+                        خبرة تزيد عن 15 عاماً في خدمة العدالة
+                        <Heart className="w-5 h-5" />
+                      </span>
                     </p>
                   </div>
 
                   <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-500">
                     <Button
                       size="lg"
-                      className="w-full sm:w-auto bg-primary hover:bg-primary/90 text-primary-foreground px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg shadow-2xl hover:shadow-primary/25 transition-all duration-300 hover:scale-105 group"
+                      className="w-full sm:w-auto bg-primary hover:bg-primary/90 text-primary-foreground px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg shadow-2xl hover:shadow-primary/25 transition-all duration-300 hover:scale-105 group animate-glow"
                       onClick={() => setActiveSection("contact")}
                     >
                       <Phone className="w-4 h-4 sm:w-5 sm:h-5 ml-2 group-hover:rotate-12 transition-transform" />
@@ -239,9 +313,14 @@ export default function LawyerWebsite() {
                 {stats.map((stat, index) => (
                   <Card
                     key={index}
-                    className="bg-card/50 border-primary/20 hover:bg-card/80 transition-all duration-300 hover:scale-105 group"
+                    className="bg-card/50 border-primary/20 hover:bg-card/80 transition-all duration-300 hover:scale-105 group relative overflow-hidden"
                   >
-                    <CardContent className="p-4 sm:p-6 text-center space-y-2 sm:space-y-3">
+                    <CardContent className="p-4 sm:p-6 text-center space-y-2 sm:space-y-3 relative z-10">
+                      {/* Legal pattern background */}
+                      <div className="absolute inset-0 opacity-5">
+                        <div className="absolute top-1 right-1 w-3 h-3 border border-primary/50 rotate-45" />
+                        <div className="absolute bottom-1 left-1 w-2 h-2 border border-primary/50 rounded-full" />
+                      </div>
                       <div className="text-primary group-hover:scale-110 transition-transform duration-300 flex justify-center">
                         {stat.icon}
                       </div>
@@ -254,6 +333,11 @@ export default function LawyerWebsite() {
 
               <div className="space-y-6 sm:space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-900">
                 <div className="text-center space-y-3 sm:space-y-4">
+                  <div className="flex items-center justify-center gap-3 mb-4">
+                    <div className="h-px w-16 bg-gradient-to-r from-transparent to-primary" />
+                    <Scale className="w-6 h-6 text-primary animate-pulse" />
+                    <div className="h-px w-16 bg-gradient-to-l from-transparent to-primary" />
+                  </div>
                   <h2 className="text-3xl sm:text-4xl font-bold text-balance">خدماتنا القانونية</h2>
                   <p className="text-base sm:text-lg text-muted-foreground text-pretty">
                     نقدم مجموعة شاملة من الخدمات القانونية المتخصصة
@@ -263,10 +347,15 @@ export default function LawyerWebsite() {
                   {services.slice(0, 4).map((service, index) => (
                     <Card
                       key={index}
-                      className="group hover:shadow-2xl transition-all duration-500 hover:scale-[1.02] bg-card/50 border-primary/20 hover:border-primary/40 cursor-pointer"
+                      className="group hover:shadow-2xl transition-all duration-500 hover:scale-[1.02] bg-card/50 border-primary/20 hover:border-primary/40 cursor-pointer relative overflow-hidden"
                       onClick={() => setActiveSection("services")}
                     >
-                      <CardContent className="p-4 sm:p-6 space-y-3 sm:space-y-4">
+                      <div className="absolute inset-0 opacity-5">
+                        <div className="absolute top-2 right-2 w-4 h-4 border border-primary/30 rotate-45" />
+                        <div className="absolute bottom-2 left-2 w-3 h-3 border border-primary/30 rounded-full" />
+                        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-8 h-8 border border-primary/20 rounded-full" />
+                      </div>
+                      <CardContent className="p-4 sm:p-6 space-y-3 sm:space-y-4 relative z-10">
                         <div className="flex items-center gap-3 sm:gap-4">
                           <div className="group-hover:scale-110 transition-transform duration-300">{service.icon}</div>
                           <h3 className="text-lg sm:text-xl font-semibold group-hover:text-primary transition-colors">
